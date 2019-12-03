@@ -1,6 +1,6 @@
 NAME=python-collectd-ceph-storage
-VERSION=0.0.2
-PACKAGE_VERSION=2
+VERSION=0.0.3
+PACKAGE_VERSION=1
 DESCRIPTION=package.description
 URL=package.url
 MAINTAINER="https://github.com/norcams"
@@ -18,9 +18,10 @@ clean:
 
 .PHONY: deps
 deps:
+	yum install -y epel-release
 	yum install -y gcc ruby-devel rpm-build
 	gem install -N fpm
-	yum install -y python-devel python-virtualenv git libyaml-devel
+	yum install -y python-devel python-virtualenv git libyaml-devel python-pip
 
 .PHONY: build
 build:
