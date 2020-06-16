@@ -18,9 +18,9 @@ clean:
 
 .PHONY: deps
 deps:
-	yum install -y epel-release
-	yum install -y gcc ruby-devel rpm-build
-	gem install -N fpm
+	yum install -y gcc rpm-build centos-release-scl epel-release
+	yum install -y rh-ruby23 rh-ruby23-ruby-devel httpd-devel
+	source /opt/rh/rh-ruby23/enable; gem install -N fpm
 	yum install -y python-devel python-virtualenv git libyaml-devel python-pip
 
 .PHONY: build
@@ -31,7 +31,7 @@ build:
 
 .PHONY: rpm
 rpm:
-	/usr/local/bin/fpm -s dir -t rpm \
+	source /opt/rh/rh-ruby23/enable; fpm -s dir -t rpm \
 		-n $(NAME) \
 		-v $(VERSION) \
 		--iteration "$(PACKAGE_VERSION).el$(RELVERSION)" \
